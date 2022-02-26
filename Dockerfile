@@ -9,7 +9,7 @@ ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 
 ENV CASC_JENKINS_CONFIG /var/jenkins_home/casc.yaml
 
-RUN git clone https://github.com/Canderson8495/jenkins_home_backup.git && rm -rf /var/jenkins_home/* && cp -rf ./jenkins_home_backup/* /var/jenkins_home/
+RUN git clone https://github.com/Canderson8495/jenkins_home_backup.git && rm -rf /var/jenkins_home/* && cp -rf /jenkins_home_backup/* /var/jenkins_home/
 
 
 RUN apt-get update \
