@@ -1,0 +1,30 @@
+node {
+    
+    def app
+    
+    stage("Prepare"){
+        try {
+            sh 'docker stop C1'
+            sh 'docker rm C1'
+            echo "Removed old containers"
+        } catch (Exception e) {
+            echo 'Returned: ' + e.toString()
+        }
+    }
+
+    stage('Pull Image') {
+        sh 'docker pull localhost:9999/fivem:${branch}'
+    }
+    
+    stage('deploy') {
+        sh 'docker run -d --name C1 localhost:9999/fivem:${branch}'
+        /*
+        sh 'git clone https://github.com/Canderson8495/fivem-1.git /tmp/${BUILD_NUMBER}'
+        sh '/tmp/${BUILD_NUMBER}'
+        sh 'ls'
+        sh 'docker-compose up -d'
+        */
+    }
+    
+}
+

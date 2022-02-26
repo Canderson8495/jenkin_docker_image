@@ -1,0 +1,31 @@
+node {
+    def app
+
+    stage('Clone repository') {
+        sh 'git clone -b ${branch} https://github.com/Canderson8495/fivem-1.git /tmp/${BUILD_NUMBER}'
+
+    }
+
+    stage('Build image') {
+        /* Build your image */
+        app = docker.build("fivem", "/tmp/${BUILD_NUMBER}")
+    }
+
+    stage('Push image') {
+        /* Push image using withRegistry. */
+        docker.withRegistry('http://localhost:9999') {
+            app.push("${branch}")
+        }
+    }
+    
+    /*
+    stage('deploy') {
+        /*
+        sh 'docker-compose -p appv1 rm --force'
+        sh 'cd /tmp/${BUILD_NUMBER}'
+        sh 'docker-compose -p appv1 up -d'
+        sh 'docker-compose -p appv1 start -d'
+    }
+    */
+}
+
