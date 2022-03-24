@@ -20,10 +20,11 @@ RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 WORKDIR /tmp
 RUN curl -fsSL https://get.docker.com | sh
 
-RUN sudo curl -L --fail https://github.com/docker/compose/releases/download/1.29.2/run.sh -o /usr/local/bin/docker-compose
+RUN apt-get install -y python3
+RUN apt-get install -y pip
+RUN apt-get install -y curl
+RUN curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 RUN chmod +x /usr/local/bin/docker-compose
-
-
 
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
