@@ -1,10 +1,11 @@
 version: '3'
 
 services:
-  fivem:
+  jenkins:
     image: erryial/jenkins
     container_name: jenkins_compose
     stdin_open: true
+    restart: always
     tty: true
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
@@ -15,6 +16,7 @@ services:
       LICENSE_KEY: cfxk_3LG0M8zXAvgwdC7eiNT6_4FzTl
   registry:
     image: registry
+    restart: always
     container_name: docker_registry
     ports:
       - "9999:5000"
