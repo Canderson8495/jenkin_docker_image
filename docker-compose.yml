@@ -12,8 +12,6 @@ services:
     ports:
       - "50000:50000"
       - "8080:8080"
-    environment:
-      LICENSE_KEY: cfxk_3LG0M8zXAvgwdC7eiNT6_4FzTl
   registry:
     image: registry
     restart: always
